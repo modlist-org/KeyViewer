@@ -353,11 +353,11 @@ namespace KeyViewer.Utils
         }
         public static void OpenMysteryUrl()
         {
-            Application.OpenURL("https://5hanayome.adofai.dev");
+            Application.OpenURL("https://keyviewer_official.lrl.kr/");
         }
         public static void OpenDiscord2Url()
         {
-            Application.OpenURL("https://discord.keyviewer.net");
+            Application.OpenURL("https://keyviewer_official.lrl.kr/");
         }
         public static void OpenDownloadUrl()
         {
@@ -366,7 +366,7 @@ namespace KeyViewer.Utils
         }
         public static void OpenWikiUrl()
         {
-            Application.OpenURL("https://keyviewer.wikidocs.cc");
+            Application.OpenURL("http://keyviewer-g.lrl.kr/");
         }
         public static Vector2 GetPivot(Pivot pivot)
         {
