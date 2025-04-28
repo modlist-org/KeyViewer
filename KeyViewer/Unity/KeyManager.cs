@@ -36,6 +36,7 @@ namespace KeyViewer.Unity
             kpsCalc.Start();
             Canvas canvas = gameObject.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 200;
             CanvasScaler scaler = gameObject.AddComponent<CanvasScaler>();
             scaler.referenceResolution = new Vector2(1280, 720);
             keys = new List<Key>();
