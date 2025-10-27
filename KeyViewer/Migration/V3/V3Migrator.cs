@@ -12,13 +12,6 @@ namespace KeyViewer.Migration.V3
         {
             var v4Settings = new Models.Settings();
             v4Settings.ActiveProfiles.AddRange(settings.Profiles.Select(p => new Models.ActiveProfile(p.Name, true)));
-            v4Settings.Language = settings.Language switch
-            {
-                LanguageType.English => Models.KeyViewerLanguage.English,
-                LanguageType.Korean => Models.KeyViewerLanguage.Korean,
-                LanguageType.SimplifiedChinese => Models.KeyViewerLanguage.Chinese,
-                _ => Models.KeyViewerLanguage.English
-            };
             profiles = new List<JsonNode>();
             foreach (var profile in settings.Profiles)
                 profiles.Add(MigrateProfile(profile).Serialize());

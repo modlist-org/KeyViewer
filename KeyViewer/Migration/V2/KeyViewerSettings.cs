@@ -14,7 +14,6 @@ namespace KeyViewer.Migration.V2
         public Color TE;
         public Color TL;
         public Color MP;
-        public LanguageEnum Language { get; set; }
         public bool ViewerOnlyGameplay { get; set; }
         public bool AnimateKeys { get; set; } = true;
         public float KeyViewerSize { get; set; } = 55f;

@@ -69,6 +69,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -322,13 +323,12 @@
     <Compile Include="Core\KPSCalculator.cs" />
     <Compile Include="Core\MethodDrawable.cs" />
     <Compile Include="Core\ModelDrawable.cs" />
-    <Compile Include="Core\KeyViewerWebAPI.cs" />
     <Compile Include="Core\ProfileImporter.cs" />
     <Compile Include="Core\RainImageManager.cs" />
     <Compile Include="Core\TextReplacing\Replacer.cs" />
     <Compile Include="Core\TextReplacing\Tag.cs" />
-    <Compile Include="Core\Translation\Language.cs" />
-    <Compile Include="Core\Translation\TranslationKeys.cs" />
+    <Compile Include="Core\Translation\Translator.cs" />
+    <Compile Include="Core\Translation\TranslatorHelper.cs" />
     <Compile Include="Lib\JSON.cs" />
     <Compile Include="Lib\JSON.Unity.cs" />
     <Compile Include="Main.cs" />
@@ -336,7 +336,6 @@
     <Compile Include="Migration\V2\KeySetting.cs" />
     <Compile Include="Migration\V2\KeyViewerProfile.cs" />
     <Compile Include="Migration\V2\KeyViewerSettings.cs" />
-    <Compile Include="Migration\V2\LanguageEnum.cs" />
     <Compile Include="Migration\V2\Point.cs" />
     <Compile Include="Migration\V2\PoSize.cs" />
     <Compile Include="Migration\V2\V2Migrator.cs" />
@@ -344,7 +343,6 @@
     <Compile Include="Migration\V3\Group.cs" />
     <Compile Include="Migration\V3\KeyRain.Config.cs" />
     <Compile Include="Migration\V3\Key.Config.cs" />
-    <Compile Include="Migration\V3\LanguageType.cs" />
     <Compile Include="Migration\V3\V3Profile.cs" />
     <Compile Include="Migration\V3\SpecialKeyType.cs" />
     <Compile Include="Migration\V3\V3Migrator.cs" />
@@ -354,13 +352,11 @@
     <Compile Include="Models\Direction.cs" />
     <Compile Include="Models\EaseConfig.cs" />
     <Compile Include="Models\DecryptedProfile.cs" />
-    <Compile Include="Models\EncryptedProfile.cs" />
     <Compile Include="Models\FileReference.cs" />
     <Compile Include="Models\GColor.cs" />
     <Compile Include="Models\GUIStatus.cs" />
     <Compile Include="Models\Judge.cs" />
     <Compile Include="Models\KeyConfig.cs" />
-    <Compile Include="Models\KeyViewerLanguage.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\PressRelease.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -379,6 +375,57 @@
     <Compile Include="Patches\RemoveFuckingUMMDummyLogPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="rapidgui\Component\FastScrollView.cs" />
+    <Compile Include="rapidgui\Component\Fold.cs" />
+    <Compile Include="rapidgui\Component\Folds.cs" />
+    <Compile Include="rapidgui\Component\IDoGUI.cs" />
+    <Compile Include="rapidgui\Component\IMColorPicker\Scripts\Editor\IMColorPickerEditor.cs" />
+    <Compile Include="rapidgui\Component\IMColorPicker\Scripts\IMColorPicker.cs" />
+    <Compile Include="rapidgui\Component\IMColorPicker\Scripts\IMColorPreset.cs" />
+    <Compile Include="rapidgui\Component\IMColorPicker\Test\TestOnGUI.cs" />
+    <Compile Include="rapidgui\Component\MinMax.cs" />
+    <Compile Include="rapidgui\Component\Utilities\Cursor\Cursor.cs" />
+    <Compile Include="rapidgui\Component\Utilities\Cursor\CursorData.cs" />
+    <Compile Include="rapidgui\Component\Utilities\FocusChecker.cs" />
+    <Compile Include="rapidgui\Component\Utilities\IDoGUIWindow.cs" />
+    <Compile Include="rapidgui\Component\Utilities\LazyFindObject.cs" />
+    <Compile Include="rapidgui\Component\Utilities\RapidGUIBehaviour.cs" />
+    <Compile Include="rapidgui\Component\Utilities\Recursive.cs" />
+    <Compile Include="rapidgui\Component\Utilities\RGUILayoutUtility.cs" />
+    <Compile Include="rapidgui\Component\Utilities\RGUIStyle.cs" />
+    <Compile Include="rapidgui\Component\Utilities\RGUIUtility.cs" />
+    <Compile Include="rapidgui\Component\Utilities\TitleContent.cs" />
+    <Compile Include="rapidgui\Component\Utilities\TitleContents.cs" />
+    <Compile Include="rapidgui\Component\Utilities\TypeUtility.cs" />
+    <Compile Include="rapidgui\Component\Utilities\TypeUtilityMemberInfo.cs" />
+    <Compile Include="rapidgui\Component\Utilities\UnparsedStr.cs" />
+    <Compile Include="rapidgui\Component\Utilities\WarningLabel.cs" />
+    <Compile Include="rapidgui\Component\Utilities\WindowInvoker.cs" />
+    <Compile Include="rapidgui\Component\WindowLauncher.cs" />
+    <Compile Include="rapidgui\Component\WindowLaunchers.cs" />
+    <Compile Include="rapidgui\RGUI\CustomGUI\CustomGUI.cs" />
+    <Compile Include="rapidgui\RGUI\Field.cs" />
+    <Compile Include="rapidgui\RGUI\Field\BoolField.cs" />
+    <Compile Include="rapidgui\RGUI\Field\ColorField.cs" />
+    <Compile Include="rapidgui\RGUI\Field\EnumField.cs" />
+    <Compile Include="rapidgui\RGUI\Field\ListField.cs" />
+    <Compile Include="rapidgui\RGUI\Field\RecursiveField.cs" />
+    <Compile Include="rapidgui\RGUI\Field\StandardField.cs" />
+    <Compile Include="rapidgui\RGUI\MinMaxSlider.cs" />
+    <Compile Include="rapidgui\RGUI\MinMaxSlider\MinMaxSliderCore.cs" />
+    <Compile Include="rapidgui\RGUI\MinMaxSlider\RecursiveMinMaxSlider.cs" />
+    <Compile Include="rapidgui\RGUI\Popup.cs" />
+    <Compile Include="rapidgui\RGUI\PrefixLabel.cs" />
+    <Compile Include="rapidgui\RGUI\ResizableWindow.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\BackgroundColorScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\ColorScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\CustomLabelScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\EnabledScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\IgnoreFieldScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\IndentScope.cs" />
+    <Compile Include="rapidgui\RGUI\Scope\PrefixLabelIndentScope.cs" />
+    <Compile Include="rapidgui\RGUI\Slider.cs" />
+    <Compile Include="rapidgui\RGUI\Slider\RecursiveSlider.cs" />
     <Compile Include="ReplayInput.cs" />
     <Compile Include="Unity\Key.cs" />
     <Compile Include="Unity\Matrix2x3.cs" />
@@ -402,8 +449,6 @@
     <Compile Include="Utils\ModelUtils.cs" />
     <Compile Include="Models\Pivot.cs" />
     <Compile Include="Utils\StringConverter.cs" />
-    <Compile Include="Views\EncryptedProfileSaveDrawer.cs" />
-    <Compile Include="Views\EncryptedProfileDrawer.cs" />
     <Compile Include="Views\MultipleKeyConfigDrawer.cs" />
     <Compile Include="Views\MultipleRainConfigDrawer.cs" />
     <Compile Include="Views\RainConfigDrawer.cs" />
@@ -411,9 +456,31 @@
     <Compile Include="Views\ProfileDrawer.cs" />
     <Compile Include="Views\SettingsDrawer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="MiscFiles\info.json" />
+    <None Include="MiscFiles\lang\English.json" />
+    <None Include="MiscFiles\lang\Korean.json" />
+    <None Include="rapidgui\Component\IMColorPicker\Resources\imPreset.asset" />
+    <None Include="rapidgui\Component\IMColorPicker\Scripts\Editor\RapidGUI.IMColorPicier.Editor.asmdef" />
+    <None Include="rapidgui\Component\IMColorPicker\Test\IMColorPickerTest.unity" />
+    <None Include="rapidgui\Component\Utilities\Cursor\Resources\cursorData.asset" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="rapidgui\Component\IMColorPicker\Resources\imBorder.png" />
+    <Content Include="rapidgui\Component\IMColorPicker\Resources\imBorderHighlighted.png" />
+    <Content Include="rapidgui\Component\IMColorPicker\Resources\imCircle.png" />
+    <Content Include="rapidgui\Component\IMColorPicker\Resources\imLeft.png" />
+    <Content Include="rapidgui\Component\IMColorPicker\Resources\imRight.png" />
+    <Content Include="rapidgui\Component\Utilities\Cursor\Resources\cursor_ew.png" />
+    <Content Include="rapidgui\Component\Utilities\Cursor\Resources\cursor_ns.png" />
+    <Content Include="rapidgui\Component\Utilities\Cursor\Resources\cursor_nwse.png" />
+    <Content Include="rapidgui\RGUI\MinMaxSlider\Resources\minmax slider thumb act.png" />
+    <Content Include="rapidgui\RGUI\MinMaxSlider\Resources\minmax slider thumb.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\KeyViewer.dll"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /I /S /E "$(ProjectDir)MiscFiles\lang\*" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\lang\"
+xcopy /Y /I "$(ProjectDir)MiscFiles\info.json" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\"
+copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\KeyViewer.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

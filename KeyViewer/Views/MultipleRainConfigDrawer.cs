@@ -7,8 +7,6 @@ using KeyViewer.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using TKM = KeyViewer.Core.Translation.TranslationKeys.Misc;
-using TKRC = KeyViewer.Core.Translation.TranslationKeys.RainConfig;
 
 namespace KeyViewer.Views
 {
@@ -20,7 +18,7 @@ namespace KeyViewer.Views
         public List<RainConfig> targetsCopy;
         private string name;
         private bool imageListExpanded = false;
-        public MultipleRainConfigDrawer(KeyManager manager, List<string> targets, RainConfig criterion) : base(criterion ?? new RainConfig(), L(TKRC.KeyConfiguration, KeyViewerUtils.AggregateComma(targets)))
+        public MultipleRainConfigDrawer(KeyManager manager, List<string> targets, RainConfig criterion) : base(criterion ?? new RainConfig(), string.Format(Main.Lang.Get("RAINCONFIG_RAIN_CONFIGURATION", "Key {0} Rain Configuration"), KeyViewerUtils.AggregateComma(targets)))
         {
             this.manager = manager;
             name = KeyViewerUtils.AggregateComma(targets);
@@ -31,43 +29,43 @@ namespace KeyViewer.Views
         public override void Draw()
         {
             bool changed = false;
-            Drawer.ButtonLabel(Name);
-            changed |= Drawer.DrawInt32(LD(TKRC.RainPoolSize, "PoolSize"), ref model.PoolSize).IfTrue(() => Set("PoolSize"));
-            changed |= Drawer.DrawSingleWithSlider(LD(TKM.Roundness, "Roundness"), ref model.Roundness, 0, Constants.Rad2Deg100, 300).IfTrue(() => Set("Roundness"));
+            GUILayout.Label(Name);
+            changed |= Drawer.DrawInt32(FormatText(Main.Lang.Get("RAINCONFIG_RAIN_POOL_SIZE", "Rain Pool Size"), "PoolSize"), ref model.PoolSize).IfTrue(() => Set("PoolSize"));
+            changed |= Drawer.DrawSingleWithSlider(FormatText(Main.Lang.Get("MISC_ROUNDNESS", "Roundness"), "Roundness"), ref model.Roundness, 0, Constants.Rad2Deg100, 300).IfTrue(() => Set("Roundness"));
             //changed |= Drawer.DrawBool(LD(TKRC.BlurEnabled, "BlurEnabled"), ref model.BlurEnabled).IfTrue(() => Set("BlurEnabled"));
-            changed |= Drawer.DrawPressReleaseH(L(TKRC.RainSpeed), model.Speed, Drawer.CD_H_FLT_SPEEDONLY).IfTrue(() => SetPR<float>("Speed"));
-            changed |= Drawer.DrawPressReleaseH(L(TKRC.RainLength), model.Length, Drawer.CD_H_FLT_LENGTHONLY).IfTrue(() => SetPR<float>("Length"));
-            changed |= Drawer.DrawPressReleaseH(L(TKRC.RainSoftness), model.Softness, Drawer.CD_H_INT32_SOFTNESSONLY).IfTrue(() => SetPR<int>("Softness"));
+            changed |= Drawer.DrawPressReleaseH(Main.Lang.Get("RAINCONFIG_RAIN_SPEED", "Rain Speed"), model.Speed, Drawer.CD_H_FLT_SPEEDONLY).IfTrue(() => SetPR<float>("Speed"));
+            changed |= Drawer.DrawPressReleaseH(Main.Lang.Get("RAINCONFIG_RAIN_LENGTH", "Rain Length"), model.Length, Drawer.CD_H_FLT_LENGTHONLY).IfTrue(() => SetPR<float>("Length"));
+            changed |= Drawer.DrawPressReleaseH(Main.Lang.Get("RAINCONFIG_RAIN_SOFTNESS", "Rain Softness"), model.Softness, Drawer.CD_H_INT32_SOFTNESSONLY).IfTrue(() => SetPR<int>("Softness"));
 
             GUILayoutEx.ExpandableGUI(() =>
             {
                 changed |= Drawer.DrawList(model.RainImages, (ref RainImage i) =>
                 {
                     bool result = false;
-                    result |= Drawer.DrawString(L(TKRC.RainImagePath), ref i.Image, true);
-                    result |= Drawer.DrawInt32(L(TKRC.RainImageCount), ref i.Count);
-                    result |= Drawer.DrawSingleWithSlider(L(TKM.Roundness), ref i.Roundness, 0, Constants.Rad2Deg100, 300);
+                    result |= Drawer.DrawString(Main.Lang.Get("RAINCONFIG_RAIN_IMAGE_PATH", "Image Path"), ref i.Image, true);
+                    result |= Drawer.DrawInt32(Main.Lang.Get("RAINCONFIG_RAIN_IMAGE_COUNT", "Image Count"), ref i.Count);
+                    result |= Drawer.DrawSingleWithSlider(Main.Lang.Get("MISC_ROUNDNESS", "Roundness"), ref i.Roundness, 0, Constants.Rad2Deg100, 300);
                     //result |= Drawer.DrawBlurConfig(L(TKM.BlurConfig, i), i.BlurConfig);
                     return result;
                 }).IfTrue(() => SetList<RainImage>("RainImages"));
-            }, L(TKRC.RainImages), ref imageListExpanded);
+            }, Main.Lang.Get("RAINCONFIG_RAIN_IMAGES", "Rain Images"), ref imageListExpanded);
 
-            Drawer.DrawObjectConfig(L(TKRC.EditRainConfig), L(TKRC.KeyRain, name), model.ObjectConfig, () => OnChangeOC("ObjectConfig"));
+            Drawer.DrawObjectConfig(Main.Lang.Get("RAINCONFIG_EDIT_RAIN_CONFIG", "Edit Rain Object Config"), string.Format(Main.Lang.Get("RAINCONFIG_KEY_RAIN", "Key {0} Rain"), name), model.ObjectConfig, () => OnChangeOC("ObjectConfig"));
 
             //if (model.BlurEnabled) changed |= Drawer.DrawBlurConfig(L(TKM.BlurConfig, Name), model.BlurConfig).IfTrue(() => SetBlurConfig("PoolSize"));
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(LD(TKRC.Direction, "Direction", name));
-                changed |= Drawer.DrawEnum(LD(TKRC.Direction, "Direction", name), ref model.Direction).IfTrue(() => Set("Direction"));
+                Drawer.Button(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_DIRECTION", "Key {0} Rain Direction"), name), "Direction"));
+                changed |= Drawer.DrawEnum(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_DIRECTION", "Key {0} Rain Direction"), name), "Direction"), ref model.Direction).IfTrue(() => Set("Direction"));
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(LD(TKRC.ImageDisplayMode, "ImageDisplayMode", name));
-                changed |= Drawer.DrawEnum(LD(TKRC.ImageDisplayMode, "ImageDisplayMode", name), ref model.ImageDisplayMode).IfTrue(() => Set("ImageDisplayMode"));
+                Drawer.Button(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_IMAGE_DISPLAY_MODE", "Key {0} Rain Image Display Mode"), name), "ImageDisplayMode"));
+                changed |= Drawer.DrawEnum(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_IMAGE_DISPLAY_MODE", "Key {0} Rain Image Display Mode"), name), "ImageDisplayMode"), ref model.ImageDisplayMode).IfTrue(() => Set("ImageDisplayMode"));
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -136,12 +134,10 @@ namespace KeyViewer.Views
             var targetsCopy = this.targetsCopy.Select(k => field.GetValue(k) as PressRelease<T>);
             KeyViewerUtils.SetMultiplePR(original, originalCopy, targets, targetsCopy, (i, o, t) => KeyInput.Shift);
         }
-        string LD(string tk, string fieldName, params object[] args)
-        {
-            string l = L(tk, args);
-            if (!KeyViewerUtils.IsEquals(targets, fieldName))
-                l += " <color=cyan>(Diff!)</color>";
-            return l;
+        string FormatText(string text, string fieldName, params object[] args) {
+            if(!KeyViewerUtils.IsEquals(targets, fieldName))
+                text += " <color=cyan>(Diff!)</color>";
+            return text;
         }
     }
 }

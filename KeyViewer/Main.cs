@@ -5,14 +5,12 @@ using KeyViewer.Controllers;
 using KeyViewer.Core;
 using KeyViewer.Core.Input;
 using KeyViewer.Core.TextReplacing;
-using KeyViewer.Core.Translation;
 using KeyViewer.Migration.V3;
 using KeyViewer.Models;
 using KeyViewer.Patches;
 using KeyViewer.Unity;
 using KeyViewer.Utils;
 using KeyViewer.Views;
-using SkyHook;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +23,7 @@ using UnityEngine;
 using static UnityModManagerNet.UnityModManager;
 using static UnityModManagerNet.UnityModManager.ModEntry;
 using Object = UnityEngine.Object;
+using Overlayer.Core.Translatior;
 
 namespace KeyViewer
 {
@@ -32,7 +31,7 @@ namespace KeyViewer
     {
         public static bool IsEnabled { get; private set; }
         public static bool IsPlaying { get; private set; }
-        public static Language Lang { get; internal set; }
+        public static Translator Lang { get; internal set; }
         public static ModEntry Mod { get; private set; }
         public static ModLogger Logger { get; private set; }
         public static Settings Settings { get; private set; }
@@ -51,6 +50,10 @@ namespace KeyViewer
         {
             Mod = modEntry;
             Logger = modEntry.Logger;
+
+            GUI = new GUIController();
+            Lang = new Translator("0KTL_KEYVIEWER");
+
             modEntry.OnToggle = OnToggle;
             modEntry.OnUpdate = OnUpdate;
             modEntry.OnGUI = OnGUI;
@@ -58,10 +61,11 @@ namespace KeyViewer
             modEntry.OnShowGUI = OnShowGUI;
             modEntry.OnHideGUI = OnHideGUI;
             modEntry.OnLateUpdate += OnLateUpdate;
-            HttpClient = new HttpClient();
             modEntry.Info.Version = Constants.Version;
             typeof(ModEntry).GetField(nameof(ModEntry.Version)).SetValue(modEntry, ModVersion = System.Version.Parse(Constants.Version));
             IsWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+            Lang.OnInitialize += OnLanguageInitialize;
         }
         public static bool OnToggle(ModEntry modEntry, bool toggle)
         {
@@ -72,7 +76,6 @@ namespace KeyViewer
                 FontManager.Initialize();
                 AssetManager.Initialize();
                 JudgementColorPatch.Initialize();
-                GUI = new GUIController();
                 Settings = new Settings();
                 if (File.Exists(Constants.SettingsPath))
                     Settings.Deserialize(JsonNode.Parse(File.ReadAllText(Constants.SettingsPath)));
@@ -95,8 +98,8 @@ namespace KeyViewer
                     Settings.ActiveProfiles.Add(def);
                     AddManager(def);
                 }
-                Lang = Language.GetLanguage(Settings.Language);
-                Language.OnInitialize += OnLanguageInitialize;
+                Lang.CurrentLanguage = Settings.Lang;
+                _ = Lang.LoadTranslationsAsync(Path.Combine(Mod.Path, "lang"));
                 Harmony = new Harmony(modEntry.Info.Id);
                 Harmony.PatchAll(Assembly.GetExecutingAssembly());
                 StaticCoroutine.Run(InitializeManagersCo());
@@ -109,7 +112,6 @@ namespace KeyViewer
                 ToDeleteFiles = null;
                 Harmony.UnpatchAll(Harmony.Id);
                 Harmony = null;
-                Language.OnInitialize -= OnLanguageInitialize;
                 JudgementColorPatch.Release();
                 //AssetManager.Release();
                 FontManager.Release();
@@ -139,8 +141,8 @@ namespace KeyViewer
         }
         public static void OnGUI(ModEntry modEntry)
         {
-            if (!Lang.Initialized)
-                Drawer.ButtonLabel("Preparing...");
+            if (Lang.GetLoading())
+                Drawer.Button("Preparing...");
             else GUI.Draw();
         }
         public static void OnSaveGUI(ModEntry modEntry)
@@ -189,7 +191,6 @@ namespace KeyViewer
                     if (hasKey)
                     {
                         if (Managers.TryGetValue(profile.Name, out _)) return true;
-                        KeyViewerUtils.LoadEncryptedProfile(File.ReadAllBytes(profilePath), profile.Key);
                         return true;
                     }
                     var profileNode = JsonNode.Parse(File.ReadAllText(profilePath));

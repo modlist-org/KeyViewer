@@ -63,17 +63,6 @@ namespace KeyViewer.Migration.V2
                 profiles.Add(newProfile);
             }
             V3Settings settings = new V3Settings();
-            settings.Language = Settings.Language switch
-            {
-                LanguageEnum.ENGLISH => LanguageType.English,
-                LanguageEnum.VIETNAMESE => LanguageType.Vietnamese,
-                LanguageEnum.SPANISH => LanguageType.Spanish,
-                LanguageEnum.FRENCH => LanguageType.French,
-                LanguageEnum.POLISH => LanguageType.Polish,
-                LanguageEnum.CHINESE_SIMPLIFIED => LanguageType.SimplifiedChinese,
-                LanguageEnum.KOREAN => LanguageType.Korean,
-                _ => LanguageType.English
-            };
             settings.Profiles = profiles;
             settings.ProfileIndex = Settings.ProfileIndex;
             return settings;
