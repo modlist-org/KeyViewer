@@ -142,7 +142,7 @@ namespace KeyViewer
         public static void OnGUI(ModEntry modEntry)
         {
             if (Lang.GetLoading())
-                Drawer.Button("Preparing...");
+                GUILayout.Label("Preparing...");
             else GUI.Draw();
         }
         public static void OnSaveGUI(ModEntry modEntry)

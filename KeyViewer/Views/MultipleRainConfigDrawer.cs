@@ -56,7 +56,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.Button(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_DIRECTION", "Key {0} Rain Direction"), name), "Direction"));
+                GUILayout.Label(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_DIRECTION", "Key {0} Rain Direction"), name), "Direction"));
                 changed |= Drawer.DrawEnum(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_DIRECTION", "Key {0} Rain Direction"), name), "Direction"), ref model.Direction).IfTrue(() => Set("Direction"));
             }
             GUILayout.FlexibleSpace();
@@ -64,7 +64,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.Button(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_IMAGE_DISPLAY_MODE", "Key {0} Rain Image Display Mode"), name), "ImageDisplayMode"));
+                GUILayout.Label(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_IMAGE_DISPLAY_MODE", "Key {0} Rain Image Display Mode"), name), "ImageDisplayMode"));
                 changed |= Drawer.DrawEnum(FormatText(string.Format(Main.Lang.Get("RAINCONFIG_IMAGE_DISPLAY_MODE", "Key {0} Rain Image Display Mode"), name), "ImageDisplayMode"), ref model.ImageDisplayMode).IfTrue(() => Set("ImageDisplayMode"));
             }
             GUILayout.FlexibleSpace();

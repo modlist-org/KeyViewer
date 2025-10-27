@@ -52,7 +52,7 @@ namespace KeyViewer.Core
                 });
             if (!string.IsNullOrEmpty(desc))
             {
-                Drawer.Button("-");
+                GUILayout.Label("-");
                 GUILayout.Label(
                     desc,
                     new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
@@ -349,12 +349,12 @@ namespace KeyViewer.Core
         {
             if (labelWidth == 0)
             {
-                Drawer.Button(name);
+                GUILayout.Label(name);
                 GUILayout.Space(4f);
             }
             else
             {
-                Drawer.Button(name, GUILayout.Width(labelWidth));
+                GUILayout.Label(name, GUILayout.Width(labelWidth));
             }
             float newValue =
                 GUILayout.HorizontalSlider(
@@ -365,7 +365,7 @@ namespace KeyViewer.Core
             }
             GUILayout.Space(8f);
             if (valueFormat != "{0}")
-                Drawer.Button(string.Format(valueFormat, newValue));
+                GUILayout.Label(string.Format(valueFormat, newValue));
             else newValue = StringConverter.ToFloat(GUILayout.TextField(newValue.ToString("F4")));
             GUILayout.FlexibleSpace();
             return newValue;
@@ -439,12 +439,12 @@ namespace KeyViewer.Core
         {
             if (labelWidth == 0)
             {
-                Drawer.Button(name);
+                GUILayout.Label(name);
                 GUILayout.Space(4f);
             }
             else
             {
-                Drawer.Button(name, GUILayout.Width(labelWidth));
+                GUILayout.Label(name, GUILayout.Width(labelWidth));
             }
             string newValue = fieldWidth <= 0 ? GUILayout.TextField(value) : GUILayout.TextField(value, GUILayout.Width(fieldWidth));
             GUILayout.FlexibleSpace();
@@ -465,23 +465,23 @@ namespace KeyViewer.Core
             GUILayout.BeginHorizontal();
             if (textWidth == 0)
             {
-                Drawer.Button(text1);
+                GUILayout.Label(text1);
                 GUILayout.Space(4f);
             }
             else
             {
-                Drawer.Button(text1, GUILayout.Width(textWidth));
+                GUILayout.Label(text1, GUILayout.Width(textWidth));
             }
             GUILayout.FlexibleSpace();
             GUILayout.Space(8f);
             if (textWidth == 0)
             {
-                Drawer.Button(text2);
+                GUILayout.Label(text2);
                 GUILayout.Space(4f);
             }
             else
             {
-                Drawer.Button(text2, GUILayout.Width(textWidth));
+                GUILayout.Label(text2, GUILayout.Width(textWidth));
             }
             GUILayout.FlexibleSpace();
             GUILayout.Space(20f);

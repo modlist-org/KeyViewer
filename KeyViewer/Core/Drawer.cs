@@ -277,14 +277,14 @@ namespace KeyViewer.Core
         }
         public static bool DrawVector2WithSlider(string label, ref Vector2 vec2, float lValue, float rValue) {
             bool result = false;
-            Drawer.Button($"<b>{label}</b>");
+            GUILayout.Label($"<b>{label}</b>");
             result |= DrawSingleWithSlider("X:", ref vec2.x, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Y:", ref vec2.y, lValue, rValue, 300f);
             return result;
         }
         public static bool DrawVector3WithSlider(string label, ref Vector3 vec3, float lValue, float rValue) {
             bool result = false;
-            Drawer.Button($"<b>{label}</b>");
+            GUILayout.Label($"<b>{label}</b>");
             result |= DrawSingleWithSlider("X:", ref vec3.x, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Y:", ref vec3.y, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Z:", ref vec3.z, lValue, rValue, 300f);
@@ -304,7 +304,7 @@ namespace KeyViewer.Core
             GUILayoutEx.ExpandableGUI((Action)(() => {
                 begin(emptyOptions);
                 {
-                    Drawer.Button(Main.Lang.Get("MISC_PRESSED", "Pressed"));
+                    GUILayout.Label(Main.Lang.Get("MISC_PRESSED", "Pressed"));
                     changed |= drawer(ref pr.Pressed);
                 }
                 end();
@@ -322,7 +322,7 @@ namespace KeyViewer.Core
 
                 begin(emptyOptions);
                 {
-                    Drawer.Button(Main.Lang.Get("MISC_RELEASED", "Released"));
+                    GUILayout.Label(Main.Lang.Get("MISC_RELEASED", "Released"));
                     changed |= drawer(ref pr.Released);
                 }
                 end();
@@ -376,7 +376,7 @@ namespace KeyViewer.Core
             for(int i = 0; i < array.Length; i++) {
                 string cache = array[i];
                 GUILayout.BeginHorizontal();
-                Drawer.Button($"{i}: ");
+                GUILayout.Label($"{i}: ");
                 cache = GUILayout.TextField(cache);
                 elementRightGUI?.Invoke(i);
                 GUILayout.FlexibleSpace();
@@ -390,7 +390,7 @@ namespace KeyViewer.Core
         }
         public static bool DrawArray(string label, ref object[] array) {
             bool result = false;
-            Drawer.Button(label);
+            GUILayout.Label(label);
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
@@ -608,7 +608,7 @@ namespace KeyViewer.Core
                     obj = str;
                     break;
                 default:
-                    Drawer.Button($"{label}{obj}");
+                    GUILayout.Label($"{label}{obj}");
                     break;
             }
             return result;
