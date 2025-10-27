@@ -27,9 +27,9 @@ namespace KeyViewer.Views
         }
         public override void Draw()
         {
-            Drawer.ButtonLabel(Name, KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(Name);
             if (relativeKeyNames.Any())
-                Drawer.ButtonLabel($"<color=#45FFCA>{L(TKKC.RelativeCoordinateMode)}: {KeyViewerUtils.AggregateComma(relativeKeyNames)}</color>", KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel($"<color=#45FFCA>{L(TKKC.RelativeCoordinateMode)}: {KeyViewerUtils.AggregateComma(relativeKeyNames)}</color>");
 
             bool changed = false;
             bool prevBgBlurEnabled = model.BackgroundBlurEnabled;

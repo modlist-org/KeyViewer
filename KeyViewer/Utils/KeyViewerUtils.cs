@@ -347,27 +347,6 @@ namespace KeyViewer.Utils
         {
             return new Vector3(fixedScale.x / parentScale.x, fixedScale.y / parentScale.y, fixedScale.z == 0 ? 0 : fixedScale.z / parentScale.z);
         }
-        public static void OpenDiscordUrl()
-        {
-            Application.OpenURL(Main.DiscordLink);
-        }
-        public static void OpenMysteryUrl()
-        {
-            Application.OpenURL("https://keyviewer_official.lrl.kr/");
-        }
-        public static void OpenDiscord2Url()
-        {
-            Application.OpenURL("https://keyviewer_official.lrl.kr/");
-        }
-        public static void OpenDownloadUrl()
-        {
-            if (Main.HasUpdate)
-                Application.OpenURL(Main.DownloadLink);
-        }
-        public static void OpenWikiUrl()
-        {
-            Application.OpenURL("http://keyviewer-g.lrl.kr/");
-        }
         public static Vector2 GetPivot(Pivot pivot)
         {
             switch (pivot)

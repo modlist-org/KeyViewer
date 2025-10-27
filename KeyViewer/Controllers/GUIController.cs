@@ -75,21 +75,7 @@ namespace KeyViewer.Controllers
             GUILayout.EndHorizontal();
             current.Draw();
 
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button(Main.Lang[TranslationKeys.KO], GUI.skin.label)) KeyViewerUtils.OpenMysteryUrl();
-            if (GUILayout.Button(Main.Lang[TranslationKeys.LINK], GUI.skin.label)) KeyViewerUtils.OpenDiscord2Url();
-            GUILayout.Space(1);
-            if (GUILayout.Button(Main.Lang[TranslationKeys.KW], GUI.skin.label)) KeyViewerUtils.OpenMysteryUrl();
-            if (GUILayout.Button(Main.Lang[TranslationKeys.LINK], GUI.skin.label)) KeyViewerUtils.OpenWikiUrl();
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-
             string[] ver = Main.Lang[TranslationKeys.Misc.RealLatestVersion].Split('.');
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button($"Square Mod Server"))
-                Application.OpenURL(Main.DiscordLink);
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
             if (GUILayout.Button(Main.Lang[TranslationKeys.BOATK], GUI.skin.label))
                 Application.OpenURL("https://github.com/PizzaLovers007/AdofaiTweaks/tree/master/AdofaiTweaks/Tweaks/KeyViewer");
         }

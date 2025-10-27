@@ -44,10 +44,6 @@ namespace KeyViewer
         public static HttpClient HttpClient { get; private set; }
         public static System.Version LastestVersion { get; private set; }
         public static System.Version ModVersion { get; private set; }
-        public static string DiscordLink { get; private set; }
-        public static string DownloadLink { get; private set; }
-        public static bool HasUpdate { get; private set; }
-        public static bool WebAPIInitialized { get; private set; } = false;
         public static HashSet<string> ToDeleteFiles { get; private set; }
         public static event System.Action OnManagersInitialized = delegate { };
         public static bool IsWindows { get; private set; }
@@ -71,7 +67,6 @@ namespace KeyViewer
         {
             if (toggle)
             {
-                InitializeWebAPI();
                 WinInput.Initialize();
                 Tag.InitializeWrapperAssembly();
                 FontManager.Initialize();
@@ -145,7 +140,7 @@ namespace KeyViewer
         public static void OnGUI(ModEntry modEntry)
         {
             if (!Lang.Initialized)
-                Drawer.ButtonLabel("Preparing...", KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel("Preparing...");
             else GUI.Draw();
         }
         public static void OnSaveGUI(ModEntry modEntry)
@@ -269,39 +264,6 @@ namespace KeyViewer
                     key.Pressed = false;
                     key.ResetRains();
                 }
-            }
-        }
-        public static async void InitializeWebAPI()
-        {
-            /*if (WebAPIInitialized) return;
-            Logger.Log($"Handshake Response:{await KeyViewerWebAPI.Handshake()}");
-            LastestVersion = await KeyViewerWebAPI.GetVersion();
-            DiscordLink = await KeyViewerWebAPI.GetDiscordLink();
-            DownloadLink = await KeyViewerWebAPI.GetDownloadLink();
-            StaticCoroutine.QAct(EnsureKeyViewerVersion);*/
-            LastestVersion = new Version(0, 0, 0);
-            DiscordLink = "https://discord.gg/WhkXF9vrER";
-            DownloadLink = "";
-            
-            WebAPIInitialized = true;
-        }
-        public static void EnsureKeyViewerVersion()
-        {
-            if (HasUpdate = LastestVersion > ModVersion)
-            {
-                Lang.ActivateUpdateMode();
-                ErrorCanvasContext ecc = new ErrorCanvasContext();
-                ecc.titleText = "WOW YOUR KEYVIEWER VERSION IS BEAUTIFUL!";
-                ecc.errorMessage =
-                    $"Current KeyViewer Version v{ModVersion}.\n" +
-                    $"But Latest KeyViewer Is v{LastestVersion}.\n" +
-                    $"PlEaSe UpDaTe YoUr KeYvIeWeR!";
-                ecc.ignoreBtnCallback = () =>
-                {
-                    ADOUtils.HideError(ecc);
-                    KeyViewerUtils.OpenDownloadUrl();
-                };
-                ADOUtils.ShowError(ecc);
             }
         }
         public static void MigrateFromV3Xml(string path)

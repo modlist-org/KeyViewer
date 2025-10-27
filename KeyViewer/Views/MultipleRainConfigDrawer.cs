@@ -31,7 +31,7 @@ namespace KeyViewer.Views
         public override void Draw()
         {
             bool changed = false;
-            Drawer.ButtonLabel(Name, KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(Name);
             changed |= Drawer.DrawInt32(LD(TKRC.RainPoolSize, "PoolSize"), ref model.PoolSize).IfTrue(() => Set("PoolSize"));
             changed |= Drawer.DrawSingleWithSlider(LD(TKM.Roundness, "Roundness"), ref model.Roundness, 0, Constants.Rad2Deg100, 300).IfTrue(() => Set("Roundness"));
             //changed |= Drawer.DrawBool(LD(TKRC.BlurEnabled, "BlurEnabled"), ref model.BlurEnabled).IfTrue(() => Set("BlurEnabled"));
@@ -58,7 +58,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(LD(TKRC.Direction, "Direction", name), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(LD(TKRC.Direction, "Direction", name));
                 changed |= Drawer.DrawEnum(LD(TKRC.Direction, "Direction", name), ref model.Direction).IfTrue(() => Set("Direction"));
             }
             GUILayout.FlexibleSpace();
@@ -66,7 +66,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(LD(TKRC.ImageDisplayMode, "ImageDisplayMode", name), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(LD(TKRC.ImageDisplayMode, "ImageDisplayMode", name));
                 changed |= Drawer.DrawEnum(LD(TKRC.ImageDisplayMode, "ImageDisplayMode", name), ref model.ImageDisplayMode).IfTrue(() => Set("ImageDisplayMode"));
             }
             GUILayout.FlexibleSpace();

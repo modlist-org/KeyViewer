@@ -26,38 +26,38 @@ namespace KeyViewer.Views
         {
             if (encProfile == null)
             {
-                Drawer.ButtonLabel(L(TEP.Damaged), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TEP.Damaged));
                 return;
             }
             if (meta == null)
             {
-                Drawer.ButtonLabel(L(TEP.Opening), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TEP.Opening));
                 return;
             }
             GUILayout.BeginHorizontal();
-            Drawer.ButtonLabel(L(TEP.NameFormat, meta.Name), KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(L(TEP.NameFormat, meta.Name));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            Drawer.ButtonLabel(L(TEP.AuthorFormat, meta.Author), KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(L(TEP.AuthorFormat, meta.Author));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            Drawer.ButtonLabel(L(TEP.DescriptionFormat, meta.Description), KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(L(TEP.DescriptionFormat, meta.Description));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             var d = DateTime.FromBinary(meta.CreationTick);
-            Drawer.ButtonLabel(L(TEP.CreationTimeFormat, $"{d.Year}/{d.Month}/{d.Day} {d.Hour}:{d.Minute}:{d.Second}"), KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(L(TEP.CreationTimeFormat, $"{d.Year}/{d.Month}/{d.Day} {d.Hour}:{d.Minute}:{d.Second}"));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             {
                 if (tryDecrypting)
-                    Drawer.ButtonLabel(L(TEP.Decrypting), KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(L(TEP.Decrypting));
                 else
                 {
-                    Drawer.ButtonLabel(L(TEP.Key), KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(L(TEP.Key));
                     key = GUILayout.TextField(key);
                     if (Drawer.Button(L(TEP.Import)))
                     {
@@ -72,7 +72,7 @@ namespace KeyViewer.Views
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             if (!string.IsNullOrEmpty(resultMessage))
-                Drawer.ButtonLabel(resultMessage, KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(resultMessage);
         }
         private async Task Open()
         {

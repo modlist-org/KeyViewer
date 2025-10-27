@@ -48,7 +48,7 @@ namespace KeyViewer.Views
         {
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(L(TKP.RegisteredKeys), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TKP.RegisteredKeys));
                 if (model.Keys.Any(k => !selectedKeys.Contains(k)))
                 {
                     if (Drawer.Button(L(TKP.SelectAllKeys)))

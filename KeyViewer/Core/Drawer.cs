@@ -116,7 +116,7 @@ namespace KeyViewer.Core
             bool result = false;
             GUILayout.BeginHorizontal();
             {
-                ButtonLabel(Main.Lang[TKM.Ease], KeyViewerUtils.OpenDiscordUrl);
+                ButtonLabel(Main.Lang[TKM.Ease]);
                 result |= DrawEnum(Main.Lang[TKM.Ease], ref config.Ease, config.GetHashCode());
             }
             GUILayout.FlexibleSpace();
@@ -154,7 +154,7 @@ namespace KeyViewer.Core
                     {
                         GUILayout.BeginVertical();
                         {
-                            ButtonLabel(Main.Lang[TKM.Pressed], KeyViewerUtils.OpenDiscordUrl);
+                            ButtonLabel(Main.Lang[TKM.Pressed]);
                             DrawGColor(ref objConfig.Color.Pressed).IfTrue(onChange);
                         }
                         GUILayout.EndVertical();
@@ -169,7 +169,7 @@ namespace KeyViewer.Core
 
                         GUILayout.BeginVertical();
                         {
-                            ButtonLabel(Main.Lang[TKM.Released], KeyViewerUtils.OpenDiscordUrl);
+                            ButtonLabel(Main.Lang[TKM.Released]);
                             DrawGColor(ref objConfig.Color.Released).IfTrue(onChange);
                         }
                         GUILayout.EndVertical();
@@ -213,7 +213,7 @@ namespace KeyViewer.Core
         public static void TitleButton(string label, string btnLabel, Action pressed)
         {
             GUILayout.BeginHorizontal();
-            ButtonLabel(label, KeyViewerUtils.OpenDiscordUrl);
+            ButtonLabel(label);
             if (Drawer.Button(btnLabel))
                 pressed?.Invoke();
             GUILayout.FlexibleSpace();
@@ -298,7 +298,7 @@ namespace KeyViewer.Core
 
             GUILayout.BeginHorizontal();
             {
-                ButtonLabel(Main.Lang[TKM.Pivot], KeyViewerUtils.OpenDiscordUrl);
+                ButtonLabel(Main.Lang[TKM.Pivot]);
                 result |= DrawEnum(Main.Lang[TKM.Pivot], ref vConfig.Pivot, vConfig.GetHashCode());
             }
             GUILayout.FlexibleSpace();
@@ -306,7 +306,7 @@ namespace KeyViewer.Core
 
             GUILayout.BeginHorizontal();
             {
-                ButtonLabel(string.Format(Main.Lang[TK.Raw], "Anchor"), KeyViewerUtils.OpenDiscordUrl);
+                ButtonLabel(string.Format(Main.Lang[TK.Raw], "Anchor"));
                 result |= DrawEnum(string.Format(Main.Lang[TK.Raw], "Anchor"), ref vConfig.Anchor, vConfig.GetHashCode());
             }
             GUILayout.FlexibleSpace();
@@ -316,7 +316,7 @@ namespace KeyViewer.Core
         public static bool DrawVector2WithSlider(string label, ref Vector2 vec2, float lValue, float rValue)
         {
             bool result = false;
-            Drawer.ButtonLabel($"<b>{label}</b>", KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel($"<b>{label}</b>");
             result |= DrawSingleWithSlider("X:", ref vec2.x, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Y:", ref vec2.y, lValue, rValue, 300f);
             return result;
@@ -324,7 +324,7 @@ namespace KeyViewer.Core
         public static bool DrawVector3WithSlider(string label, ref Vector3 vec3, float lValue, float rValue)
         {
             bool result = false;
-            Drawer.ButtonLabel($"<b>{label}</b>", KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel($"<b>{label}</b>");
             result |= DrawSingleWithSlider("X:", ref vec3.x, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Y:", ref vec3.y, lValue, rValue, 300f);
             result |= DrawSingleWithSlider("Z:", ref vec3.z, lValue, rValue, 300f);
@@ -348,7 +348,7 @@ namespace KeyViewer.Core
             {
                 begin(emptyOptions);
                 {
-                    Drawer.ButtonLabel(Main.Lang[TKM.Pressed], (Action)KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(Main.Lang[TKM.Pressed]);
                     changed |= drawer(ref pr.Pressed);
                 }
                 end();
@@ -366,7 +366,7 @@ namespace KeyViewer.Core
 
                 begin(emptyOptions);
                 {
-                    Drawer.ButtonLabel(Main.Lang[TKM.Released], (Action)KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(Main.Lang[TKM.Released]);
                     changed |= drawer(ref pr.Released);
                 }
                 end();
@@ -428,7 +428,7 @@ namespace KeyViewer.Core
             {
                 string cache = array[i];
                 GUILayout.BeginHorizontal();
-                Drawer.ButtonLabel($"{i}: ", KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel($"{i}: ");
                 cache = GUILayout.TextField(cache);
                 elementRightGUI?.Invoke(i);
                 GUILayout.FlexibleSpace();
@@ -444,7 +444,7 @@ namespace KeyViewer.Core
         public static bool DrawArray(string label, ref object[] array)
         {
             bool result = false;
-            Drawer.ButtonLabel(label, KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(label);
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
@@ -507,7 +507,7 @@ namespace KeyViewer.Core
         {
             bool prev = value;
             GUILayout.BeginHorizontal();
-            Drawer.ButtonLabel(label, KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(label);
             value = GUILayout.Toggle(value, string.Empty);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -635,7 +635,7 @@ namespace KeyViewer.Core
                     obj = str;
                     break;
                 default:
-                    Drawer.ButtonLabel($"{label}{obj}", KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel($"{label}{obj}");
                     break;
             }
             return result;
@@ -658,7 +658,7 @@ namespace KeyViewer.Core
         {
             string prev = value;
             GUILayout.BeginHorizontal();
-            ButtonLabel(label, KeyViewerUtils.OpenDiscordUrl);
+            ButtonLabel(label);
             value = GUILayout.TextField(value);
             if (trimQuote) value = value.TrimQuote();
             GUILayout.FlexibleSpace();
@@ -700,34 +700,12 @@ namespace KeyViewer.Core
             value = StringConverter.ToUInt64(str);
             return result;
         }
-        static readonly string[] ilovesuckyoubus =
+        public static void ButtonLabel(string label, params GUILayoutOption[] options)
         {
-            "<color=#FF8800>나</color><color=#E9922A>는</color> <color=#BEA77F>석</color><color=#A8B2AA>큐</color><color=#92BCD4>버</color><color=#7DC7FF>스</color><color=#6AD0DE>를</color> <color=#45E39D>좋</color><color=#32EC7D>아</color><color=#1FF55D>해</color><color=#0DFF3C>요</color>",
-            "<color=#1251FF>나</color><color=#0F6ED8>는</color> <color=#09A88C>석</color><color=#06C566>큐</color><color=#03E240>버</color><color=#00FF1A>스</color><color=#03E240>를</color> <color=#09A88C>사</color><color=#0C8BB2>랑</color><color=#0F6ED8>해</color><color=#1251FF>요</color>",
-            "<color=#FF14C0>나</color><color=#EF26B2>는</color> <color=#D04A96>석</color><color=#C05C88>큐</color><color=#B16E7B>버</color><color=#A1806D>스</color><color=#92925F>를</color> <color=#73B644>연</color><color=#63C836>모</color><color=#54DA28>해</color><color=#44EC1A>요</color>",
-            "<color=#FF94F4>나</color><color=#ED96F4>는</color> <color=#CB9AF6>석</color><color=#BA9CF7>큐</color><color=#A99EF8>버</color><color=#98A0F9>스</color><color=#87A2F9>를</color> <color=#65A6FB>사</color><color=#54A8FC>모</color><color=#43AAFD>해</color><color=#32ACFE>요</color>",
-            "<color=#FF0000>나</color><color=#FF6D00>는</color> <color=#B6FF00>석</color><color=#48FF00>큐</color><color=#00FF24>버</color><color=#00FF91>스</color><color=#00FEFF>를</color> <color=#0024FF>귀</color><color=#4800FF>여</color><color=#B600FF>워</color><color=#FF00DA>해</color><color=#FF006D>요</color>",
-            "<color=#FF73F6>나</color><color=#DC86F7>는</color> <color=#97AEFA>석</color><color=#75C2FC>큐</color><color=#52D6FD>버</color><color=#30EAFF>스</color><color=#52D6FD>를</color> <color=#97AEFA>존</color><color=#BA9AF9>경</color><color=#DC86F7>해</color><color=#FF73F6>요</color>",
-            "<color=#30EAFF>나</color><color=#35EDE0>는</color> <color=#40F4A4>석</color><color=#45F886>큐</color><color=#4AFB68>버</color><color=#4FFF4A>스</color><color=#6DEF62>를</color> <color=#A7D093>예</color><color=#C4C1AC>뻐</color><color=#E1B2C4>해</color><color=#FEA2DD>요</color>",
-            "<color=#47FFE0>나</color><color=#64E5E5>는</color> <color=#9EB1EF>석</color><color=#BB97F4>큐</color><color=#D87DF9>버</color><color=#F563FE>스</color><color=#D87DF9>를</color> <color=#9EB1EF>동</color><color=#81CBEA>경</color><color=#64E5E5>해</color><color=#47FFE0>요</color>",
-        };
-        static int index = 0;
-        static float targetTime = 0;
-        public static void ButtonLabel(string label, Action onPressed, params GUILayoutOption[] options)
-        {
-            if (targetTime > Time.time)
-                label = ilovesuckyoubus[index];
-            if (GUILayout.Button(label, GUI.skin.label, options))
-            {
-                /*targetTime = Time.time + 1.5f;
-                if (++index == ilovesuckyoubus.Length) index = 0;
-                Main.Logger.Log(ilovesuckyoubus[index]);*/
-            }
+            GUILayout.Button(label, GUI.skin.label, options);
         }
         public static bool Button(string label)
         {
-            if (targetTime > Time.time)
-                label = ilovesuckyoubus[index];
             return GUILayout.Button(label);
         }
     }

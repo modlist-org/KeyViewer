@@ -27,7 +27,7 @@ namespace KeyViewer.Views
             {
                 GUILayout.BeginHorizontal();
                 {
-                    Drawer.ButtonLabel(L(TKKC.KeyCode) + (model.Code == KeyCode.Menu ? " (Fake)" : ""), KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(L(TKKC.KeyCode) + (model.Code == KeyCode.Menu ? " (Fake)" : ""));
                     Drawer.DrawEnum(L(TKKC.KeyCode), ref model.Code, model.GetHashCode());
                 }
                 GUILayout.FlexibleSpace();

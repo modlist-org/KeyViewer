@@ -17,7 +17,7 @@ namespace KeyViewer.Views
         {
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(L(TKS.SelectLanguage), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TKS.SelectLanguage));
                 if (Drawer.DrawEnum(L(TKS.Language), ref model.Language))
                 {
                     Main.GUI.Skip(() =>
@@ -78,7 +78,7 @@ namespace KeyViewer.Views
                 {
                     var profile = model.ActiveProfiles[i];
                     var encrypted = profile.Key != null;
-                    Drawer.ButtonLabel(profile.Name, KeyViewerUtils.OpenDiscordUrl);
+                    Drawer.ButtonLabel(profile.Name);
                     var newActive = GUILayout.Toggle(profile.Active, string.Empty);
                     if (profile.Active != newActive)
                     {

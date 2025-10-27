@@ -22,7 +22,7 @@ namespace KeyViewer.Views
         {
             bool changed = false;
             string name = config.DummyName ?? config.Code.ToString();
-            Drawer.ButtonLabel(Name, KeyViewerUtils.OpenDiscordUrl);
+            Drawer.ButtonLabel(Name);
             changed |= Drawer.DrawInt32(L(TKRC.RainPoolSize), ref model.PoolSize);
             changed |= Drawer.DrawSingleWithSlider(L(TKM.Roundness), ref model.Roundness, 0, Constants.Rad2Deg100, 300);
             //changed |= Drawer.DrawBool(L(TKRC.BlurEnabled), ref model.BlurEnabled);
@@ -49,7 +49,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(L(TKRC.Direction, name), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TKRC.Direction, name));
                 changed |= Drawer.DrawEnum(L(TKRC.Direction, name), ref model.Direction);
             }
             GUILayout.FlexibleSpace();
@@ -57,7 +57,7 @@ namespace KeyViewer.Views
 
             GUILayout.BeginHorizontal();
             {
-                Drawer.ButtonLabel(L(TKRC.ImageDisplayMode, name), KeyViewerUtils.OpenDiscordUrl);
+                Drawer.ButtonLabel(L(TKRC.ImageDisplayMode, name));
                 changed |= Drawer.DrawEnum(L(TKRC.ImageDisplayMode, name), ref model.ImageDisplayMode);
             }
             GUILayout.FlexibleSpace();
