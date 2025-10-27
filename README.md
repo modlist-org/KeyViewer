@@ -6,4 +6,5 @@ KeyViewer is a mod that displays the key viewer in ADOFAI in-game.
 Originally made by [c3nb](https://github.com/c3nb).
 
 # ⚖️  Licenses
-[AdofaiTweaks](https://github.com/PizzaLovers007/AdofaiTweaks) is licensed under the MIT License. 
+[AdofaiTweaks](https://github.com/PizzaLovers007/AdofaiTweaks) is licensed under the MIT License.  
+[RapidGUI](https://github.com/fuqunaga/RapidGUI) is licensed under the MIT License.  
