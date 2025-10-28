@@ -2,7 +2,7 @@
     "Id": "KeyViewer",
     "DisplayName": "KeyViewer",
     "Author": "Square & kkitut",
-    "Version": "4.10.0",
+    "Version": "4.10.1",
     "AssemblyName": "KeyViewer.dll",
     "EntryMethod": "KeyViewer.Main.Load"
   }
