@@ -255,7 +255,7 @@ namespace KeyViewer.Core
         public static bool DrawVectorConfig(VectorConfig vConfig) {
             bool result = false;
             result |= DrawPressReleaseV(Main.Lang.Get("MISC_SCALE", "Scale"), vConfig.Scale, CD_V_VEC2_0_10_300);
-            result |= DrawPressReleaseV(Main.Lang.Get("MISC_SCALE", "Scale"), vConfig.Offset, CD_V_VEC3_WIDTH_HEIGHT_Z_300);
+            result |= DrawPressReleaseV(Main.Lang.Get("MISC_OFFSET", "Offset"), vConfig.Offset, CD_V_VEC3_WIDTH_HEIGHT_Z_300);
             result |= DrawPressReleaseV(Main.Lang.Get("MISC_ROTATION", "Rotation"), vConfig.Rotation, CD_V_VEC3_M180_180_300);
 
             GUILayout.BeginHorizontal();
