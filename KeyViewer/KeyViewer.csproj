@@ -481,6 +481,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /I /S /E "$(ProjectDir)MiscFiles\lang\*" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\lang\"
 xcopy /Y /I "$(ProjectDir)MiscFiles\info.json" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\"
+xcopy /Y /I "$(ProjectDir)MiscFiles\KeyViewer.assets" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\"
 copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\A Dance of Fire and Ice\Mods\KeyViewer\KeyViewer.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>
